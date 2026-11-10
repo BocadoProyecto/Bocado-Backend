@@ -116,6 +116,8 @@ function eliminarProducto(req, res) {
   res.json({ mensaje: "Producto eliminado", producto: eliminado[0] });
 }
 
+
+
 // Exportamos todas las funciones para usarlas en las rutas
 module.exports = {
   obtenerProductos,
