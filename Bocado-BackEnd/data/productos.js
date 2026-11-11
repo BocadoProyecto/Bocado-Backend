@@ -33,6 +33,22 @@ const productos = [
   { id: 32, nombre: "Brownie con nueces", panaderia: "Flor de Pan", categoria: "Dulces", precio: 65, precioOriginal: 110, disponibles: 5 },
   { id: 33, nombre: "Medialunas de jamón y queso (x4)", panaderia: "Nueva Malvín", categoria: "Salados", precio: 100, precioOriginal: 170, disponibles: 4 },
   { id: 34, nombre: "Torta de dulce de leche", panaderia: "Nueva Malvín", categoria: "Tortas", precio: 230, precioOriginal: 400, disponibles: 1 },
+  { id: 35, nombre: "Empanadas de carne (x6)", panaderia: "Sabores", categoria: "Salados", precio: 210, precioOriginal: 360, disponibles: 4 },
+  { id: 36, nombre: "Milanesa al pan", panaderia: "Sabores", categoria: "Salados", precio: 140, precioOriginal: 240, disponibles: 5 },
+  { id: 37, nombre: "Pan francés (x6)", panaderia: "Sabores", categoria: "Panes", precio: 70, precioOriginal: 120, disponibles: 9 },
+  { id: 38, nombre: "Chivito al pan", panaderia: "Rústica Panadería Artesanal", categoria: "Salados", precio: 150, precioOriginal: 260, disponibles: 3 },
+  { id: 39, nombre: "Yo-yo de dulce de leche", panaderia: "Rústica Panadería Artesanal", categoria: "Dulces", precio: 45, precioOriginal: 80, disponibles: 8 },
+  { id: 40, nombre: "Pan integral", panaderia: "Rústica Panadería Artesanal", categoria: "Panes", precio: 95, precioOriginal: 160, disponibles: 5 },
+  { id: 41, nombre: "Palmeritas (x8)", panaderia: "El Piñón", categoria: "Facturas", precio: 75, precioOriginal: 130, disponibles: 10 },
+  { id: 42, nombre: "Torta de chocolate (porción)", panaderia: "El Piñón", categoria: "Tortas", precio: 95, precioOriginal: 170, disponibles: 4 },
+  { id: 43, nombre: "Bizcochos de queso (x6)", panaderia: "El Piñón", categoria: "Salados", precio: 85, precioOriginal: 145, disponibles: 7 },
+  { id: 44, nombre: "Alfajor de maicena (x3)", panaderia: "Alfajores del Uruguay", categoria: "Dulces", precio: 150, precioOriginal: 270, disponibles: 6 },
+  { id: 45, nombre: "Alfajor de chocolate blanco", panaderia: "Alfajores del Uruguay", categoria: "Dulces", precio: 70, precioOriginal: 125, disponibles: 8 },
+  { id: 46, nombre: "Caja de alfajores surtidos (x6)", panaderia: "Alfajores del Uruguay", categoria: "Dulces", precio: 280, precioOriginal: 480, disponibles: 2},
+  { id: 47, nombre: "Pan de leche (x4)", panaderia: "La Nueva Zeze", categoria: "Panes", precio: 60, precioOriginal: 105, disponibles: 8 },
+  { id: 48, nombre: "Croissants mini (x8)", panaderia: "La Nueva Zeze", categoria: "Facturas", precio: 90, precioOriginal: 155, disponibles: 5 },
+  { id: 49, nombre: "Tiramisú individual", panaderia: "Porto Vanila", categoria: "Tortas", precio: 160, precioOriginal: 285, disponibles: 3 },
+  { id: 50, nombre: "Cañoncitos de dulce de leche (x4)", panaderia: "Porto Vanila", categoria: "Dulces", precio: 85, precioOriginal: 150, disponibles: 6 },
 ];
 
 module.exports = productos;
