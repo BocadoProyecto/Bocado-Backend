@@ -1,17 +1,38 @@
-// ============================================================
-// data/productos.js  →  LOS DATOS
-// ------------------------------------------------------------
-// Acá viven los productos. Por ahora es un array en memoria:
-// si apagás el servidor, los cambios se pierden y vuelve a
-// arrancar con estos productos. (Más adelante esto será una
-// base de datos, pero la idea es la misma.)
-// ============================================================
-
 const productos = [
-  { id: 1, nombre: "Remera" },
-  { id: 2, nombre: "Pantalón" },
-  { id: 3, nombre: "Campera" }
+  { id: 1, nombre: "Croissant de manteca", panaderia: "La Espiga", categoria: "Facturas", precio: 45, precioOriginal: 90, disponibles: 6 },
+  { id: 2, nombre: "Pan de campo", panaderia: "La Espiga", categoria: "Panes", precio: 80, precioOriginal: 130, disponibles: 4 },
+  { id: 3, nombre: "Medialunas (x6)", panaderia: "La Espiga", categoria: "Facturas", precio: 120, precioOriginal: 210, disponibles: 3 },
+  { id: 4, nombre: "Pan integral", panaderia: "La Espiga", categoria: "Panes", precio: 70, precioOriginal: 115, disponibles: 5 },
+  { id: 5, nombre: "Bizcochos surtidos", panaderia: "Horno del Barrio", categoria: "Facturas", precio: 95, precioOriginal: 160, disponibles: 8 },
+  { id: 6, nombre: "Pan francés (x4)", panaderia: "Horno del Barrio", categoria: "Panes", precio: 60, precioOriginal: 100, disponibles: 10 },
+  { id: 7, nombre: "Alfajor de maicena", panaderia: "Horno del Barrio", categoria: "Dulces", precio: 40, precioOriginal: 75, disponibles: 12 },
+  { id: 8, nombre: "Pan dulce", panaderia: "Horno del Barrio", categoria: "Dulces", precio: 150, precioOriginal: 260, disponibles: 2 },
+  { id: 9, nombre: "Brownie", panaderia: "Dulce Esquina", categoria: "Dulces", precio: 55, precioOriginal: 95, disponibles: 7 },
+  { id: 10, nombre: "Tarta de manzana", panaderia: "Dulce Esquina", categoria: "Tortas", precio: 180, precioOriginal: 320, disponibles: 2 },
+  { id: 11, nombre: "Muffin de arándanos", panaderia: "Dulce Esquina", categoria: "Dulces", precio: 50, precioOriginal: 85, disponibles: 6 },
+  { id: 12, nombre: "Torta de zanahoria", panaderia: "Dulce Esquina", categoria: "Tortas", precio: 210, precioOriginal: 380, disponibles: 1 },
+  { id: 13, nombre: "Medialunas (x6)", panaderia: "Las Novedades", categoria: "Facturas", precio: 90, precioOriginal: 150, disponibles: 9 },
+  { id: 14, nombre: "Pan de campo", panaderia: "Las Novedades", categoria: "Panes", precio: 85, precioOriginal: 140, disponibles: 5 },
+  { id: 15, nombre: "Chajá individual", panaderia: "Las Novedades", categoria: "Tortas", precio: 120, precioOriginal: 210, disponibles: 3 },
+  { id: 16, nombre: "Croissant de manteca", panaderia: "Brava", categoria: "Facturas", precio: 70, precioOriginal: 125, disponibles: 6 },
+  { id: 17, nombre: "Rol de canela", panaderia: "Brava", categoria: "Dulces", precio: 95, precioOriginal: 170, disponibles: 4 },
+  { id: 18, nombre: "Baguette", panaderia: "Brava", categoria: "Panes", precio: 65, precioOriginal: 110, disponibles: 8 },
+  { id: 19, nombre: "Torta de zanahoria (porción)", panaderia: "Brava", categoria: "Tortas", precio: 100, precioOriginal: 180, disponibles: 3 },
+  { id: 20, nombre: "Pan de masa madre", panaderia: "Club del Pan", categoria: "Panes", precio: 140, precioOriginal: 240, disponibles: 4 },
+  { id: 21, nombre: "Alfajor de nuez", panaderia: "Club del Pan", categoria: "Dulces", precio: 60, precioOriginal: 105, disponibles: 7 },
+  { id: 22, nombre: "Empanada de cebolla y queso", panaderia: "Club del Pan", categoria: "Salados", precio: 55, precioOriginal: 95, disponibles: 6 },
+  { id: 23, nombre: "Éclair de chocolate", panaderia: "Saint Germain", categoria: "Dulces", precio: 110, precioOriginal: 190, disponibles: 4 },
+  { id: 24, nombre: "Croissant de almendras", panaderia: "Saint Germain", categoria: "Facturas", precio: 100, precioOriginal: 175, disponibles: 5 },
+  { id: 25, nombre: "Tarta de limón (porción)", panaderia: "Saint Germain", categoria: "Tortas", precio: 130, precioOriginal: 230, disponibles: 2 },
+  { id: 26, nombre: "Bizcochos de grasa (x10)", panaderia: "El León", categoria: "Facturas", precio: 80, precioOriginal: 135, disponibles: 10 },
+  { id: 27, nombre: "Pan de molde casero", panaderia: "El León", categoria: "Panes", precio: 90, precioOriginal: 150, disponibles: 6 },
+  { id: 28, nombre: "Pasta frola", panaderia: "El León", categoria: "Tortas", precio: 115, precioOriginal: 200, disponibles: 3 },
+  { id: 29, nombre: "Sándwich de milanesa", panaderia: "La Fontana", categoria: "Salados", precio: 130, precioOriginal: 220, disponibles: 5 },
+  { id: 30, nombre: "Pan dulce con frutas", panaderia: "La Fontana", categoria: "Dulces", precio: 160, precioOriginal: 280, disponibles: 2 },
+  { id: 31, nombre: "Scon de queso", panaderia: "Flor de Pan", categoria: "Salados", precio: 60, precioOriginal: 100, disponibles: 6 },
+  { id: 32, nombre: "Brownie con nueces", panaderia: "Flor de Pan", categoria: "Dulces", precio: 65, precioOriginal: 110, disponibles: 5 },
+  { id: 33, nombre: "Medialunas de jamón y queso (x4)", panaderia: "Nueva Malvín", categoria: "Salados", precio: 100, precioOriginal: 170, disponibles: 4 },
+  { id: 34, nombre: "Torta de dulce de leche", panaderia: "Nueva Malvín", categoria: "Tortas", precio: 230, precioOriginal: 400, disponibles: 1 },
 ];
 
-// Exportamos el array para que el controller lo pueda usar.
 module.exports = productos;

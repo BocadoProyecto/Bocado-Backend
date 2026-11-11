@@ -1,3 +1,30 @@
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const productosRoutes = require("./routes/productos.routes");
+const panaderiasRoutes = require("./routes/panaderias.routes");
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Bienvenido a mi backend");
+});
+
+app.use("/productos", productosRoutes);
+app.use("/panaderias", panaderiasRoutes);
+
+app.use((req, res) => {
+  res.status(404).json({ mensaje: "Ruta no encontrada" });
+});
+
+const PUERTO = 3000;
+app.listen(PUERTO, () => {
+  console.log(`Servidor corriendo en http://localhost:${PUERTO}`);
+});
+
+
+
 // ============================================================
 // index.js  →  EL SERVIDOR (punto de entrada)
 // ------------------------------------------------------------
@@ -6,7 +33,7 @@
 // ============================================================
 
 // 1) Traemos Express y creamos la app (Ficha 1)
-const express = require("express");
+/*const express = require("express");
 const app = express();
 
 // 2) Traemos las rutas de productos (Ficha 3)
@@ -35,3 +62,4 @@ const PUERTO = 3000;
 app.listen(PUERTO, () => {
   console.log(`Servidor corriendo en http://localhost:${PUERTO}`);
 });
+*/
