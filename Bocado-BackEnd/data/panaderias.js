@@ -10,7 +10,7 @@ const panaderias = [
   },
   {
     "id": 2,
-    "nombre": "Porto Vanila ",
+    "nombre": "Porto Vanila (Punta Carretas)",
     "telefono": "+598 2712 0300",
     "direccion": "José Ellauri 351, Montevideo",
     "horario": "Lun-Jue 9:30-21:00; Vie-Sáb 9:30-21:30; Dom 9:30-21:00",
@@ -19,7 +19,7 @@ const panaderias = [
   },
   {
     "id": 3,
-    "nombre": "Nueva Logroñesa ",
+    "nombre": "Nueva Logroñesa (a confirmar)",
     "telefono": null,
     "direccion": "Cno. Carrasco 4490, Montevideo",
     "horario": null,
@@ -100,7 +100,7 @@ const panaderias = [
   },
   {
     "id": 12,
-    "nombre": "Nueva Malvín",
+    "nombre": "Nueva Malvín (NM1)",
     "telefono": "+598 2619 1654",
     "direccion": "Hipólito Yrigoyen 1419, Montevideo",
     "horario": "Lun cerrado; Mar-Dom 7:00-20:00",
@@ -109,14 +109,22 @@ const panaderias = [
   },
   {
     "id": 13,
-    "nombre": "Panone",
+    "nombre": "Panané (a confirmar: Panone)",
     "telefono": "+598 2303 8431",
     "direccion": "Av. Carlos María Ramírez 197, Montevideo",
     "horario": "Lun-Sáb 7:30-20:00; Dom cerrado",
     "latitud": -34.8571491,
     "longitud": -56.224875
   },
-  
+  {
+    "id": 14,
+    "nombre": "Más Migas (no encontrada)",
+    "telefono": null,
+    "direccion": null,
+    "horario": null,
+    "latitud": null,
+    "longitud": null
+  },
   {
     "id": 15,
     "nombre": "Las Novedades",
@@ -128,7 +136,7 @@ const panaderias = [
   },
   {
     "id": 16,
-    "nombre": "Saint Germain",
+    "nombre": "Saint Germain (Pocitos)",
     "telefono": "+598 96 288 777",
     "direccion": "Pte. Gral. Oscar Gestido 2805, Montevideo",
     "horario": "Todos los días 8:00-20:00",
