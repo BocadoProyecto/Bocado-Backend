@@ -20,14 +20,16 @@ function obtenerPanaderias(req, res) {
   const cercanas = [];
 
   for (const p of panaderias) {
-    const distancia = calcularDistanciaKm(latUsuario, lngUsuario, p.lat, p.lng);
+    const distancia = calcularDistanciaKm(latUsuario, lngUsuario, p.latitud, p.longitud);
 
     if (distancia <= radioKm) {
       cercanas.push({
         id: p.id,
         nombre: p.nombre,
+        telefono:p.telefono,
         direccion: p.direccion,
-        distancia: distancia
+        horario: p.horario,
+        distancia
       });
     }
   }
