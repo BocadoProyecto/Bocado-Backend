@@ -1,34 +1,33 @@
-// ============================================================
-// controllers/productos.controller.js  →  LA LÓGICA
-// ------------------------------------------------------------
-// Acá está "lo que hace" cada ruta. Cada función recibe:
-//   req → lo que manda el cliente (params, body)
-//   res → lo que usamos para responder
-// ============================================================
-
-// Traemos los datos desde la carpeta data
 const productos = require("../data/productos");
 
-// ------------------------------------------------------------
-// GET /productos  →  Listar todos
-// (Ficha 0: listarProductos)
-// ------------------------------------------------------------
 function obtenerProductos(req, res) {
-  res.json(productos);
+  const { panaderia, categoria } = req.query;
+
+  const resultado = productos.filter((p) => {
+    const cumplePanaderia =
+      !panaderia || panaderia === "todas" || p.panaderia === panaderia;
+    const cumpleCategoria =
+      !categoria || categoria === "todas" || p.categoria === categoria;
+    return cumplePanaderia && cumpleCategoria;
+  });
+
+  res.json(resultado);
 }
 
-// ------------------------------------------------------------
-// GET /productos/:id  →  Buscar uno por id
-// (Ficha 0: buscarProducto)
-// ------------------------------------------------------------
+function obtenerPanaderias(req, res) {
+  res.json([...new Set(productos.map((p) => p.panaderia))].sort());
+}
+
+function obtenerCategorias(req, res) {
+  res.json([...new Set(productos.map((p) => p.categoria))].sort());
+}
+
 function obtenerProductoPorId(req, res) {
-  // Lo que viene en la URL siempre es texto ("1"),
-  // por eso lo pasamos a número con Number().
+
   const id = Number(req.params.id);
 
   const producto = productos.find((p) => p.id === id);
 
-  // Si no existe, avisamos con código 404 (No encontrado)
   if (!producto) {
     return res.status(404).json({ mensaje: "Producto no encontrado" });
   }
@@ -36,46 +35,42 @@ function obtenerProductoPorId(req, res) {
   res.json(producto);
 }
 
-// ------------------------------------------------------------
-// POST /productos  →  Agregar uno nuevo
-// (Ficha 0: agregarProducto / Ficha 2: POST)
-// ------------------------------------------------------------
-function agregarProducto(req, res) {
-  // Si el cliente no manda body, req.body llega "undefined".
-  // Con "|| {}" usamos un objeto vacío y no se rompe nada.
-  const { nombre } = req.body || {};
 
-  // Validación: si no mandan nombre, no agregamos nada.
-  // Código 400 = "el pedido está mal hecho".
-  if (!nombre) {
-    return res.status(400).json({ mensaje: "Falta el nombre del producto" });
+function agregarProducto(req, res) {
+
+  const { nombre, panaderia, categoria, precio, precioOriginal, disponibles } =
+    req.body || {};
+
+  if (
+    !nombre ||
+    !panaderia ||
+    !categoria ||
+    precio == null ||
+    precioOriginal == null
+  ) {
+    return res.status(400).json({ mensaje: "Faltan datos del producto" });
   }
 
-  // ¿Por qué no usamos productos.length + 1?
-  // Si borramos un producto, el length baja y se pueden repetir ids.
-  // Más seguro: buscar el id más alto y sumarle 1.
-  const ultimoId = productos.length > 0
-    ? Math.max(...productos.map((p) => p.id))
-    : 0;
+  const ultimoId =
+    productos.length > 0 ? Math.max(...productos.map((p) => p.id)) : 0;
 
   const nuevoProducto = {
     id: ultimoId + 1,
-    nombre: nombre
+    nombre,
+    panaderia,
+    categoria,
+    precio: Number(precio),
+    precioOriginal: Number(precioOriginal),
+    disponibles: Number(disponibles) || 0,
   };
 
   productos.push(nuevoProducto);
 
-  // Código 201 = "creado". Devolvemos el producto nuevo.
   res.status(201).json(nuevoProducto);
 }
 
-// ------------------------------------------------------------
-// PUT /productos/:id  →  Modificar uno
-// (Ficha 0: modificarProducto / Ficha 2: PUT)
-// ------------------------------------------------------------
 function modificarProducto(req, res) {
   const id = Number(req.params.id);
-  const { nombre } = req.body || {};
 
   const producto = productos.find((p) => p.id === id);
 
@@ -83,46 +78,40 @@ function modificarProducto(req, res) {
     return res.status(404).json({ mensaje: "Producto no encontrado" });
   }
 
-  if (!nombre) {
-    return res.status(400).json({ mensaje: "Falta el nombre del producto" });
-  }
+  const { nombre, panaderia, categoria, precio, precioOriginal, disponibles } =
+    req.body || {};
 
-  // Como "producto" apunta al objeto que está dentro del array,
-  // al cambiarlo acá se cambia también en el array.
-  producto.nombre = nombre;
+  if (nombre !== undefined) producto.nombre = nombre;
+  if (panaderia !== undefined) producto.panaderia = panaderia;
+  if (categoria !== undefined) producto.categoria = categoria;
+  if (precio !== undefined) producto.precio = Number(precio);
+  if (precioOriginal !== undefined)
+    producto.precioOriginal = Number(precioOriginal);
+  if (disponibles !== undefined) producto.disponibles = Number(disponibles);
 
   res.json(producto);
 }
 
-// ------------------------------------------------------------
-// DELETE /productos/:id  →  Eliminar uno
-// (Ficha 2: DELETE)
-// ------------------------------------------------------------
 function eliminarProducto(req, res) {
   const id = Number(req.params.id);
 
-  // findIndex devuelve la POSICIÓN en el array (o -1 si no está)
   const posicion = productos.findIndex((p) => p.id === id);
 
   if (posicion === -1) {
     return res.status(404).json({ mensaje: "Producto no encontrado" });
   }
 
-  // splice(posicion, 1) saca 1 elemento desde esa posición.
-  // Usamos splice (y no filter) para modificar el MISMO array
-  // que exporta data/productos.js.
   const eliminado = productos.splice(posicion, 1);
 
   res.json({ mensaje: "Producto eliminado", producto: eliminado[0] });
 }
 
-
-
-// Exportamos todas las funciones para usarlas en las rutas
 module.exports = {
   obtenerProductos,
+  obtenerPanaderias,
+  obtenerCategorias,
   obtenerProductoPorId,
   agregarProducto,
   modificarProducto,
-  eliminarProducto
+  eliminarProducto,
 };
