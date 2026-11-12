@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const cors = require("cors");
 const app = express();
 const productosRoutes = require("./routes/productos.routes");
@@ -6,6 +7,7 @@ const panaderiasRoutes = require("./routes/panaderias.routes");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
   res.send("Bienvenido a mi backend");
