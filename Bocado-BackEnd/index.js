@@ -6,6 +6,7 @@ const app = express();
 const productosRoutes = require("./routes/productos.routes");
 const panaderiasRoutes = require("./routes/panaderias.routes");
 const pagosRoutes = require("./routes/pagos.routes");
+const authRoutes = require("./routes/auth.routes");
 
 app.use(cors());
 app.use(express.json());
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 app.use("/productos", productosRoutes);
 app.use("/panaderias", panaderiasRoutes);
 app.use("/pagos", pagosRoutes);
+app.use("/auth", authRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ mensaje: "Ruta no encontrada" });
