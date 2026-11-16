@@ -9,7 +9,7 @@ const pagosRoutes = require("./routes/pagos.routes");
 const authRoutes = require("./routes/auth.routes");
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "5mb" })); // 5mb para poder recibir la foto del producto
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {

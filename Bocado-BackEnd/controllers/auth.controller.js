@@ -17,15 +17,22 @@ function contrasenaCorrecta(contrasena, registro) {
   );
 }
 
-function buscarPorNombre(lista, nombre) {
-  const buscado = nombre.trim().toLowerCase();
-  return lista.find((r) => r.nombre.toLowerCase() === buscado);
+// Busca por nombre o por email (el front loguea con el email)
+function buscarPorNombre(lista, dato) {
+  const buscado = dato.trim().toLowerCase();
+  return lista.find(
+    (r) =>
+      r.nombre.toLowerCase() === buscado ||
+      (r.email && r.email.toLowerCase() === buscado),
+  );
 }
 
 // ---------- REGISTRO ----------
 function crearRegistro(lista, camposExtra) {
   return function (req, res) {
-    const { nombre, contrasena } = req.body || {};
+    const { contrasena, email } = req.body || {};
+    // los clientes no tienen campo "nombre" en el formulario: usamos el email
+    const nombre = (req.body && req.body.nombre) || email;
 
     if (
       typeof nombre !== "string" ||
@@ -33,13 +40,16 @@ function crearRegistro(lista, camposExtra) {
       typeof contrasena !== "string" ||
       contrasena === ""
     ) {
-      return res.status(400).json({ mensaje: "Faltan nombre o contrasena" });
+      return res.status(400).json({ mensaje: "Faltan datos del registro" });
     }
 
-    if (buscarPorNombre(lista, nombre)) {
+    if (
+      buscarPorNombre(lista, nombre) ||
+      (typeof email === "string" && buscarPorNombre(lista, email))
+    ) {
       return res
         .status(409)
-        .json({ mensaje: "Ya existe una cuenta con ese nombre" });
+        .json({ mensaje: "Ya existe una cuenta con ese nombre o email" });
     }
 
     const salt = crypto.randomBytes(16).toString("hex");
@@ -62,20 +72,24 @@ function crearRegistro(lista, camposExtra) {
   };
 }
 
-const registrarUsuario = crearRegistro(usuarios, ["email"]);
+const registrarUsuario = crearRegistro(usuarios, ["email", "telefono"]);
 const registrarPanaderia = crearRegistro(panaderiasRegistradas, [
   "email",
   "telefono",
+  "localidad",
   "direccion",
+  "mensaje",
 ]);
 
 // ---------- INICIO DE SESIÓN ----------
 function crearLogin(lista, token) {
   return function (req, res) {
-    const { nombre, contrasena } = req.body || {};
+    const { contrasena } = req.body || {};
+    // se puede entrar con el nombre o con el email
+    const nombre = (req.body && (req.body.nombre || req.body.email)) || "";
 
     if (typeof nombre !== "string" || typeof contrasena !== "string") {
-      return res.status(400).json({ mensaje: "Faltan nombre o contrasena" });
+      return res.status(400).json({ mensaje: "Faltan email o contrasena" });
     }
 
     const registro = buscarPorNombre(lista, nombre);
@@ -83,7 +97,7 @@ function crearLogin(lista, token) {
     if (!registro || !contrasenaCorrecta(contrasena, registro)) {
       return res
         .status(401)
-        .json({ ok: false, mensaje: "Nombre o contraseña incorrectos" });
+        .json({ ok: false, mensaje: "Email o contraseña incorrectos" });
     }
 
     res.json({

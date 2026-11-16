@@ -1,4 +1,22 @@
+const fs = require("fs");
+const path = require("path");
 const productos = require("../data/productos");
+const { panaderiasRegistradas } = require("../data/registros");
+
+const CARPETA_IMAGENES = path.join(__dirname, "..", "public", "Imagenes", "Productos");
+
+// Guarda una foto que llega como "data:image/png;base64,...." y devuelve el nombre del archivo
+function guardarImagen(dataUrl, id) {
+  const coincidencia = /^data:image\/(png|jpe?g|webp);base64,(.+)$/.exec(dataUrl || "");
+  if (!coincidencia) return null;
+  const extension = coincidencia[1] === "jpeg" ? "jpg" : coincidencia[1];
+  const nombreArchivo = `producto-${id}.${extension}`;
+  fs.writeFileSync(
+    path.join(CARPETA_IMAGENES, nombreArchivo),
+    Buffer.from(coincidencia[2], "base64"),
+  );
+  return nombreArchivo;
+}
 
 function obtenerProductos(req, res) {
   const { panaderia, categoria } = req.query;

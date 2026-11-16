@@ -27,7 +27,7 @@ const usuarios = [
 const panaderiasRegistradas = [
   {
     id: 1,
-    nombre: "ClubDelPan",
+    nombre: "Club del Pan",
     contrasena: hashearContrasena("1234", saltPanaderia),
     salt: saltPanaderia,
     email: "ClubDelPan@bocado.com",
