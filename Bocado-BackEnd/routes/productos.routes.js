@@ -7,7 +7,7 @@ const router = express.Router();
 
 const {
   obtenerProductos,
-  obtenerPanaderias,
+
   obtenerCategorias,
   obtenerProductoPorId,
   agregarProducto,
@@ -17,7 +17,7 @@ const {
 
 //        MÉTODO   RUTA            FUNCIÓN DEL CONTROLLER
 router.get(    "/",           obtenerProductos);      // Listar todos (con filtros)
-router.get(    "/panaderias", obtenerPanaderias);     // Lista de panaderías (ANTES de "/:id")
+
 router.get(    "/categorias", obtenerCategorias);     // Lista de categorías (ANTES de "/:id")
 router.get(    "/:id",        obtenerProductoPorId);  // Buscar uno
 router.post(   "/",           agregarProducto);       // Agregar

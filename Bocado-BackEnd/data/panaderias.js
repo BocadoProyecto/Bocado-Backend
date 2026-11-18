@@ -27,7 +27,7 @@ const panaderias = [
     horario: null,
     latitud: -34.8718502,
     longitud: -56.1205289,
-    logo: "Nuevalogroñesa.jpg",
+    logo: "Nuevalogronesa.jpg",
   },
   {
     id: 4,

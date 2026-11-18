@@ -48,9 +48,7 @@ function obtenerProductos(req, res) {
   res.json(resultado);
 }
 
-function obtenerPanaderias(req, res) {
-  res.json([...new Set(productos.map((p) => p.panaderia))].sort());
-}
+
 
 function obtenerCategorias(req, res) {
   res.json([...new Set(productos.map((p) => p.categoria))].sort());
@@ -159,10 +157,9 @@ function eliminarProducto(req, res) {
 
 module.exports = {
   obtenerProductos,
-  obtenerPanaderias,
   obtenerCategorias,
   obtenerProductoPorId,
   agregarProducto,
   modificarProducto,
-  eliminarProducto,
+  eliminarProducto
 };
