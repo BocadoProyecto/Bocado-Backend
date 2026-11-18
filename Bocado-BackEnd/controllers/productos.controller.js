@@ -1,4 +1,20 @@
 const fs = require("fs");
+// Devuelve un mensaje de error si los números no sirven, o "" si está todo bien
+function validarNumeros(precio, precioOriginal, disponibles) {
+  if (isNaN(precio) || precio <= 0) {
+    return "El precio tiene que ser un número mayor a 0";
+  }
+  if (isNaN(precioOriginal) || precioOriginal <= 0) {
+    return "El precio original tiene que ser un número mayor a 0";
+  }
+  if (precio > precioOriginal) {
+    return "El precio de excedente no puede ser mayor al original";
+  }
+  if (isNaN(disponibles) || disponibles < 0) {
+    return "Las unidades disponibles no pueden ser negativas";
+  }
+  return "";
+}
 const path = require("path");
 const productos = require("../data/productos");
 const { panaderiasRegistradas } = require("../data/registros");
@@ -68,6 +84,11 @@ function agregarProducto(req, res) {
   ) {
     return res.status(400).json({ mensaje: "Faltan datos del producto" });
   }
+    const stock = disponibles === undefined ? 0 : Number(disponibles);
+  const mensajeError = validarNumeros(Number(precio), Number(precioOriginal), stock);
+  if (mensajeError) {
+    return res.status(400).json({ mensaje: mensajeError });
+  }
 
   const ultimoId =
     productos.length > 0 ? Math.max(...productos.map((p) => p.id)) : 0;
@@ -99,13 +120,25 @@ function modificarProducto(req, res) {
   const { nombre, panaderia, categoria, precio, precioOriginal, disponibles } =
     req.body || {};
 
+  // calculamos cómo quedaría el producto ANTES de guardarlo
+  const nuevoPrecio = precio !== undefined ? Number(precio) : producto.precio;
+  const nuevoOriginal =
+    precioOriginal !== undefined ? Number(precioOriginal) : producto.precioOriginal;
+  const nuevoStock =
+    disponibles !== undefined ? Number(disponibles) : producto.disponibles;
+
+  const mensajeError = validarNumeros(nuevoPrecio, nuevoOriginal, nuevoStock);
+  if (mensajeError) {
+    return res.status(400).json({ mensaje: mensajeError });
+  }
+
+  // si todo está bien, recién ahora guardamos
   if (nombre !== undefined) producto.nombre = nombre;
   if (panaderia !== undefined) producto.panaderia = panaderia;
   if (categoria !== undefined) producto.categoria = categoria;
-  if (precio !== undefined) producto.precio = Number(precio);
-  if (precioOriginal !== undefined)
-    producto.precioOriginal = Number(precioOriginal);
-  if (disponibles !== undefined) producto.disponibles = Number(disponibles);
+  producto.precio = nuevoPrecio;
+  producto.precioOriginal = nuevoOriginal;
+  producto.disponibles = nuevoStock;
 
   res.json(producto);
 }

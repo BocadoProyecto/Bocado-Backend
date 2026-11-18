@@ -1,7 +1,7 @@
 const Stripe = require("stripe");
 const productos = require("../data/productos");
 
-const MONEDA = "brl";
+const MONEDA = "uyu";
 
 function obtenerStripe() {
   const clave = process.env.STRIPE_SECRET_KEY;
